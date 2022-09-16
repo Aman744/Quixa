@@ -25,7 +25,7 @@
     var source = getElementVal('source');
     var tags = getElementVal('tags');
     var status = getElementVal('status');
-    
+
 
     console.log(category, title, story, source, tags ,status);
     saveArticlesData(category, title, story, source, tags ,status);
@@ -45,7 +45,7 @@ const saveArticlesData = (category, title, story, source, tags, status) => {
         source : source,
         tags : tags,
         status : status,
-   
+
     });
 
 };
@@ -77,3 +77,32 @@ quixaArticlesData.once('value', function(snapshot){
       $('#showQuixaArticles').append(content);
   }
 });
+
+// clear data
+$('#clear').click(function() {
+  $('input-data').value="";
+});
+
+//Title character count
+$('#title').keyup(function(){textCheck('#title');});
+
+//Story character count
+$('#story').keyup(function(){textCheck('#story');});
+
+// Function to check Text Count
+function textCheck(element){
+    var length = $(element).val().length;
+    var maxLength = $(element).attr('maxlength');
+    var remaining = maxLength - length;
+  $(element + 'Count').html(remaining + ' characters remaining');
+textAlert(remaining, element, 20);
+}
+
+// Function to show Alert in Red
+function textAlert(length, element, alert){
+  if (length <= alert){
+    $(element + 'Count').css('color', 'red');
+    }
+    else if (length >= alert){
+        $(element + 'Count').css('color', 'gray');}
+}
