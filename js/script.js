@@ -63,20 +63,29 @@ quixaArticlesData.once('value', function(snapshot){
       var content = '';
       snapshot.forEach(function(data){
           var val = data.val();
-          content +='<div class="card my-4" style="width: 100%;">';
-          content +='<div class="card-body">'
-          content += '<div class="">Category - ' + val.category + '</div>';
-          content += '<h5 class="card-title">' + val.title + '</h5>';
-          content += '<p class="card-text">' + val.story + '</p>';
-          content += '<p class="card-text">Source - ' + val.source + '</p>';
-          content += '<p class="card-text">Tags - ' + val.tags + '</p>';
-          content += '</div>';
-          content += '</div>';
-          content += '</div>';
-      });
+          var titleref = val.title;
+          if (val.status === "pending"){
+          content +='<div class="card my-4" style="width: 100%;">' +
+          '<div class="card-body">'+
+          '<div class="">Category - ' + val.category + '</div>' +
+          '<h5 class="card-title">' + val.title + '</h5>' +
+          '<p class="card-text">' + val.story + '</p>' +
+          '<p class="card-text">Source - ' + val.source + '</p>'+
+          '<p class="card-text">Tags - ' + val.tags + '</p>'+
+          '<p class="card-text">Status - ' + val.status + '</p>'+
+          '<button class="approve" id="approve' + val.title + '" onclick:"approval(titleref)">Approve</button>'+
+          '</div></div></div>';
+      }
+    });
       $('#showQuixaArticles').append(content);
   }
 });
+
+// Update Firebase Post Status
+function approve(uid){
+var db = firebase.database();
+db.ref(uid/status).set("Published");
+}
 
 // clear data
 $('#clear').click(function() {
