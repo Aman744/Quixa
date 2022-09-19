@@ -7,17 +7,10 @@
     border-bottom: 1px solid #ced4da !important;
     border-radius: 0rem !important;
 }
-.navbar-nav{
-    width: 100%;
-    justify-content: space-evenly;
+.active {
+    background: #66c4ff;
+    border-radius: 24px;
 }
-.article{
-    background: rgb(61,151,203);
+.active a{
     color: white !important;
-    border-radius: 20px;
-}
-.fa{
-    font-size: 30px !important;
-    color: rgb(61,151,203);
-    margin-top: 10px !important;
 }
